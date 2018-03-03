@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 import pickle
 from pathlib import Path
+import requests
 
 app = Flask(__name__)
 
@@ -93,6 +94,10 @@ def node1():
         # res.append(condition)
         conditionS = ' '.join(condition[1:])
         ress = eval(conditionS)
+        if(ress):
+            requests.get("http://192.168.45.03?mode=1")
+        else:
+            requests.get("http://192.168.45.03?mode=0")
         res.append(condition)
 
     return jsonify({'res':res, 'ress':ress}), 200
@@ -130,6 +135,10 @@ def node2():
         # res.append(condition)
         conditionS = ' '.join(condition[1:])
         ress = eval(conditionS)
+        if(ress):
+            requests.get("http://192.168.45.03?mode=1")
+        else:
+            requests.get("http://192.168.45.03?mode=0")
         res.append(condition)
 
     return jsonify({'res':res, 'ress':ress}), 200
@@ -167,6 +176,10 @@ def node3():
         # res.append(condition)
         conditionS = ' '.join(condition[1:])
         ress = eval(conditionS)
+        if(ress):
+            requests.get("http://192.168.45.03?mode=1")
+        else:
+            requests.get("http://192.168.45.03?mode=0")
         res.append(condition)
 
     return jsonify({'res':res, 'ress':ress}), 200
