@@ -1,0 +1,279 @@
+<html>
+
+<head>
+    <title>
+        Index
+    </title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <style>
+        .draggable {
+            width: 50px;
+            height: 50px;
+            padding: 0.5em;
+            background: white;
+        }
+        
+        .droppable {
+            width: 300px;
+            height: 50px;
+            padding: 0.5em;
+            float: left;
+            /* margin: 10px; */
+            position: relative;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        var condition = "";
+        var command = "";
+        var elseCommand = "";
+        $(function() {
+            $(".draggable").draggable({
+                revert: "invalid"
+            });
+            $(".condition-drop").droppable({
+                accept: ".condition",
+                drop: function(event, ui) {
+                    console.log(ui);
+                    if (ui.draggable.context.id == "condition") {
+                        if (ui.draggable.context.className.indexOf("form-group") !== -1) {
+                            ui.draggable.context.children[0].addEventListener("change", function() {
+                                condition += ui.draggable.context.children[0].value + "!";
+                            });
+                        } else {
+                            condition += ui.draggable.context.innerText + "!";
+                        }
+                    }
+                    // console.log(ui.draggable.context);
+                    a = ui.draggable.context.cloneNode(true);
+                    a.style.left = 0;
+                    a.style.top = 0;
+                    document.getElementById("conditions").appendChild(a);
+                    // document.getElementById("conditions").innerHTML = document.getElementById("conditions").innerHTML + a.outerHTML;
+                    console.log(condition);
+                    console.log(command);
+                    $(".draggable").draggable({
+                        revert: "invalid"
+                    });
+
+                },
+                out: function(event, ui) {
+                    console.log("out");
+                    // console.log(ui);
+                    // alert('moved');1
+                    if (ui.draggable.context.id == "condition") {
+                        condition = condition.replace(ui.draggable.context.innerText + "!", "");
+                    }
+                    console.log(condition);
+                    // console.log(command);
+                }
+
+            });
+            $(".then-drop").droppable({
+                accept: ".action",
+                drop: function(event, ui) {
+                    command += ui.draggable.context.innerText + "!";
+                    a = ui.draggable.context.cloneNode(true);
+                    a.style.left = 0;
+                    a.style.top = 0;
+                    document.getElementById("actions").appendChild(a);
+                    $(".draggable").draggable({
+                        revert: "invalid"
+                    });
+                },
+                out: function(event, ui) {
+                    console.log("out");
+                    if (ui.draggable.context.id == "action") {
+                        command = command.replace(ui.draggable.context.innerText + "!", "");
+                    }
+                    // console.log(condition);
+                    console.log(command);
+                }
+            });
+            $(".else-drop").droppable({
+                accept: ".action",
+                drop: function(event, ui) {
+                    elseCommand += ui.draggable.context.innerText + "!";
+                    a = ui.draggable.context.cloneNode(true);
+                    a.style.left = 0;
+                    a.style.top = 0;
+                    document.getElementById("actions").appendChild(a);
+                    $(".draggable").draggable({
+                        revert: "invalid"
+                    });
+                },
+                out: function(event, ui) {
+                    console.log("out");
+                    if (ui.draggable.context.id == "action") {
+                        elseCommand = elseCommand.replace(ui.draggable.context.innerText + "!", "");
+                    }
+                    console.log(elseCommand);
+                    // console.log(command);
+                }
+            });
+            $(".actions").droppable({
+                accept: ".action"
+            });
+            $(".conditions").droppable({
+                accept: ".condition"
+            });
+        });
+
+        function dele(e) {
+            id = e.id;
+            $.ajax({
+                type: "POST",
+                url: "http://127.0.0.1:5000/del",
+                data: JSON.stringify({id:id}),
+                contentType: 'application/json',
+                success: function(result) {
+                    console.log(result);
+                }
+            });
+            e.parentNode.parentNode.removeChild(e.parentNode);
+        }
+
+        function send() {
+            // $.post("http://127.0.0.1:5000/temp", {
+            //     'condition': condition,
+            //     'then': command,
+            //     'else': elseCommand
+            // }, function(data, status) {
+            //     // alert(status);
+            //     console.log(status);
+            //     console.log(data);
+            //     // alert(data);
+            // });
+            var data = {
+                condition: condition,
+                then: command,
+                else: elseCommand
+            }
+            $.ajax({
+                type: "POST",
+                url: "http://127.0.0.1:5000/temp",
+                data: JSON.stringify(data),
+                contentType: 'application/json',
+                success: function(result) {
+                    console.log(result);
+                }
+            });
+        }
+    </script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="header">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Mak3rspace</a>
+                </div>
+            </div>
+        </nav>
+        <nav class="navbar navbar-inverse">
+        </nav>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="side-panel col-md-3" style="z-index:1000; border-right: 1px solid black; height:100%">
+                <div class="row">
+                    <div class="conditions col-md-12" id="conditions">
+                        <h2>Conditions</h2>
+                        <div class="draggable condition" id="condition">
+                            if
+                        </div>
+                        <div class="draggable condition" id="condition">
+                            < 
+                        </div>
+                        <div class="draggable condition" id="condition">
+                            >
+                        </div>
+                        <div class="draggable condition" id="condition">
+                            =
+                        </div>
+                        <div class="draggable condition" id="condition">
+                            <=
+                        </div>
+                                        <div class="draggable condition" id="condition">
+                                            >=
+                                        </div>
+                                        <div class="draggable condition" id="condition">
+                                            ==
+                                        </div>
+                                        <div class="draggable condition" id="condition">
+                                            AND
+                                        </div>
+                                        <div class="draggable condition" id="condition">
+                                            OR
+                                        </div>
+                                        <div class="draggable condition" id="condition">
+                                            Temp
+                                        </div>
+                                        <div class="draggable condition" id="condition">
+                                            Hum
+                                        </div>
+                                        <div class="draggable condition" id="condition">
+                                            Mois
+                                        </div>
+                                        <div class="draggable condition form-group" id="condition" style="width:100px">
+                                            <input type="text" class="form-control" id="val">
+                                        </div>
+                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="actions col-md-12" id="actions">
+                                <h2>Actions</h2>
+                                <div class="draggable action" id="action">
+                                    Turn on Motor
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="area col-md-6" style="z-index:1">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2>Presets</h2>
+                                {% for r in conditions %}
+                                <div class="jumbotron" style="height:40px; float:left; background:black; color:white; margin-right:10px">
+                                    {{ r['c'] }}
+                                    <button id="{{ r['i'] }}" class="close" style="margin-left:10px; color:white" aria-label="Close" onclick="dele(this)">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2>Create New</h2>
+                                <div class="jumbotron condition-drop" id="condition">
+                                    Drop Conditions here
+                                </div>
+                                <div class="jumbotron then-drop" id="then">
+                                    Then
+                                </div>
+                                <div class="jumbotron else-drop" id="else">
+                                    Else
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <center>
+                                <button id="sub" class="btn btn-active" onclick="send()">
+                                ADD
+                            </button>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" footer ">
+
+            </div>
+</body>
+
+</html>
