@@ -82,9 +82,13 @@ def node1():
     f = open("values", "wb")
     pickle.dump(values, f)
     f.close()
-    f = open("file", "rb")
-    rules = pickle.load(f)
-    f.close()
+    file = Path("file")
+    if file.is_file():
+        f = open("file", "rb")
+        rules = pickle.load(f)
+        f.close()
+    else:
+        rules = []
     res = []
     # return jsonify({'rules':rules}), 200
     for rule in rules:
@@ -121,9 +125,13 @@ def node2():
     f = open("values", "wb")
     pickle.dump(values, f)
     f.close()
-    f = open("file", "rb")
-    rules = pickle.load(f)
-    f.close()
+    file = Path("file")
+    if file.is_file():
+        f = open("file", "rb")
+        rules = pickle.load(f)
+        f.close()
+    else:
+        rules = []
     res = []
     # return jsonify({'rules':rules}), 200
     for rule in rules:
@@ -162,9 +170,13 @@ def node3():
     f = open("values", "wb")
     pickle.dump(values, f)
     f.close()
-    f = open("file", "rb")
-    rules = pickle.load(f)
-    f.close()
+    file = Path("file")
+    if file.is_file():
+        f = open("file", "rb")
+        rules = pickle.load(f)
+        f.close()
+    else:
+        rules = []
     res = []
     # return jsonify({'rules':rules}), 200
     for rule in rules:
