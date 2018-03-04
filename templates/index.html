@@ -124,8 +124,8 @@
             id = e.id;
             $.ajax({
                 type: "POST",
-                // url: "http://192.168.43.200:5000/del",
-                url: "http://127.0.0.1:5000/del",
+                 url: "http://192.168.43.200:5000/del",
+//                url: "http://127.0.0.1:5000/del",
                 data: JSON.stringify({
                     id: id
                 }),
@@ -155,8 +155,8 @@
             }
             $.ajax({
                 type: "POST",
-                // url: "http://192.168.43.200:5000/temp",
-                url: "http://127.0.0.1:5000/temp",
+                 url: "http://192.168.43.200:5000/temp",
+//                url: "http://127.0.0.1:5000/temp",
                 data: JSON.stringify(data),
                 contentType: 'application/json',
                 success: function(result) {
