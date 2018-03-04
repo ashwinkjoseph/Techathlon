@@ -74,7 +74,7 @@ def node1():
             'Temp':0,
             'Mois':0
         }
-    Hum = request.args.get('Hum')
+    Hum = int(request.args.get('Hum'))
     values['Hum'] = Hum
     Hum = values['Hum']
     Temp = values['Temp']
@@ -117,7 +117,7 @@ def node2():
             'Temp':0,
             'Mois':0
         }
-    Temp = request.args.get('Temp')
+    Temp = int(request.args.get('Temp'))
     values['Temp'] = Temp
     Hum = values['Hum']
     Temp = values['Temp']
@@ -162,7 +162,7 @@ def node3():
             'Temp':0,
             'Mois':0
         }
-    Mois = request.args.get('Mois')
+    Mois = int(request.args.get('Mois'))
     values['Mois'] = Mois
     Hum = values['Hum']
     Temp = values['Temp']
