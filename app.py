@@ -70,11 +70,11 @@ def node1():
         f.close()
     else:
         values = {
-            'Hum':0,
-            'Temp':0,
-            'Mois':0
+            'Hum':0.0,
+            'Temp':0.0,
+            'Mois':0.0
         }
-    Hum = int(request.args.get('Hum'))
+    Hum = float(request.args.get('Hum'))
     values['Hum'] = Hum
     Hum = values['Hum']
     Temp = values['Temp']
@@ -113,11 +113,11 @@ def node2():
         f.close()
     else:
         values = {
-            'Hum':0,
-            'Temp':0,
-            'Mois':0
+            'Hum':0.0,
+            'Temp':0.0,
+            'Mois':0.0
         }
-    Temp = int(request.args.get('Temp'))
+    Temp = float(request.args.get('Temp'))
     values['Temp'] = Temp
     Hum = values['Hum']
     Temp = values['Temp']
@@ -158,11 +158,11 @@ def node3():
         f.close()
     else:
         values = {
-            'Hum':0,
-            'Temp':0,
-            'Mois':0
+            'Hum':0.0,
+            'Temp':0.0,
+            'Mois':0.0
         }
-    Mois = int(request.args.get('Mois'))
+    Mois = float(request.args.get('Mois'))
     values['Mois'] = Mois
     Hum = values['Hum']
     Temp = values['Temp']
