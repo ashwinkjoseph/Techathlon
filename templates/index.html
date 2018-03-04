@@ -124,8 +124,11 @@
             id = e.id;
             $.ajax({
                 type: "POST",
-                url: "http://192.168.43.200:5000/del",
-                data: JSON.stringify({id:id}),
+                // url: "http://192.168.43.200:5000/del",
+                url: "http://127.0.0.1:5000/del",
+                data: JSON.stringify({
+                    id: id
+                }),
                 contentType: 'application/json',
                 success: function(result) {
                     console.log(result);
@@ -152,7 +155,8 @@
             }
             $.ajax({
                 type: "POST",
-                url: "http://192.168.43.200:5000/temp",
+                // url: "http://192.168.43.200:5000/temp",
+                url: "http://127.0.0.1:5000/temp",
                 data: JSON.stringify(data),
                 contentType: 'application/json',
                 success: function(result) {
@@ -187,17 +191,16 @@
                             if
                         </div>
                         <div class="draggable condition" id="condition">
-                            < 
-                        </div>
-                        <div class="draggable condition" id="condition">
-                            >
-                        </div>
-                        <div class="draggable condition" id="condition">
-                            =
-                        </div>
-                        <div class="draggable condition" id="condition">
-                            <=
-                        </div>
+                            < </div>
+                                <div class="draggable condition" id="condition">
+                                    >
+                                </div>
+                                <div class="draggable condition" id="condition">
+                                    =
+                                </div>
+                                <div class="draggable condition" id="condition">
+                                    <=
+                            </div>
                                         <div class="draggable condition" id="condition">
                                             >=
                                         </div>

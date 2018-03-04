@@ -96,10 +96,10 @@ def node1():
         condition.pop()
         conditionS = ' '.join(condition[1:])
         ress = eval(conditionS)
-        if(ress):
-            requests.get("http://192.168.45.03?mode=1")
-        else:
-            requests.get("http://192.168.45.03?mode=0")
+        # if(ress):
+        #     requests.get("http://192.168.45.03?mode=1")
+        # else:
+        #     requests.get("http://192.168.45.03?mode=0")
         res.append(condition)
 
     return jsonify({'res':res}), 200
@@ -141,10 +141,10 @@ def node2():
         # res.append(condition)
         conditionS = ' '.join(condition[1:])
         ress = eval(conditionS)
-        if(ress):
-            requests.get("http://192.168.45.03?mode=1")
-        else:
-            requests.get("http://192.168.45.03?mode=0")
+        # if(ress):
+        #     requests.get("http://192.168.45.03?mode=1")
+        # else:
+        #     requests.get("http://192.168.45.03?mode=0")
         res.append(condition)
 
     return jsonify({'res':res}), 200
@@ -186,10 +186,10 @@ def node3():
         # res.append(condition)
         conditionS = ' '.join(condition[1:])
         ress = eval(conditionS)
-        if(ress):
-            requests.get("http://192.168.45.03?mode=1")
-        else:
-            requests.get("http://192.168.45.03?mode=0")
+        # if(ress):
+        #     requests.get("http://192.168.45.03?mode=1")
+        # else:
+        #     requests.get("http://192.168.45.03?mode=0")
         res.append(condition)
 
     return jsonify({'res':res}), 200
