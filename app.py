@@ -90,8 +90,6 @@ def node1():
     for rule in rules:
         condition = rule['condition'].split("!")
         condition.pop()
-        # print(condition)
-        # res.append(condition)
         conditionS = ' '.join(condition[1:])
         ress = eval(conditionS)
         if(ress):
@@ -100,7 +98,7 @@ def node1():
             requests.get("http://192.168.45.03?mode=0")
         res.append(condition)
 
-    return jsonify({'res':res, 'ress':ress}), 200
+    return jsonify({'res':res}), 200
 
 @app.route('/node2', methods=['GET'])
 def node2():
@@ -141,7 +139,7 @@ def node2():
             requests.get("http://192.168.45.03?mode=0")
         res.append(condition)
 
-    return jsonify({'res':res, 'ress':ress}), 200
+    return jsonify({'res':res}), 200
 
 @app.route('/node3', methods=['GET'])
 def node3():
@@ -182,7 +180,7 @@ def node3():
             requests.get("http://192.168.45.03?mode=0")
         res.append(condition)
 
-    return jsonify({'res':res, 'ress':ress}), 200
+    return jsonify({'res':res}), 200
 
 @app.route('/temp', methods=['POST'])
 def addTemp():
