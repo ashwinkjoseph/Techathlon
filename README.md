@@ -1,4 +1,4 @@
-# Techathlon
+# Techathlon (Hackathon conducted at NIT Calicut, Kerala)
 Repo of code written for the smart farming platform developed as part of Techathlon '18
 
 This project won the second price in the hackathon.
